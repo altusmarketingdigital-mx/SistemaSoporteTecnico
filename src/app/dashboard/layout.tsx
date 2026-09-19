@@ -45,8 +45,9 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         <div className="p-4 border-t">
           <form action={async () => {
             'use server'
-            const supabase = await createClient()
-            await supabase.auth.signOut()
+            // MOCKUP PHASE: Evitamos llamar a Supabase porque aún no hay .env
+            // const supabase = await createClient()
+            // await supabase.auth.signOut()
             redirect('/login')
           }}>
             <button type="submit" className="flex items-center space-x-3 text-slate-600 hover:text-red-600 w-full px-3 py-2 rounded-md transition-colors">
