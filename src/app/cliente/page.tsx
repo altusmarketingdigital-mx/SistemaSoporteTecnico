@@ -13,9 +13,11 @@ export default function ClienteDashboard() {
           <h1 className="text-3xl font-bold text-slate-800">Hola, Roberto</h1>
           <p className="text-slate-500">Aquí puedes dar seguimiento a todas tus solicitudes de soporte.</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm h-11 px-6">
-          <PlusCircle className="mr-2 h-5 w-5" /> Nuevo Ticket
-        </Button>
+        <Link href="/cliente/nuevo-ticket">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm h-11 px-6">
+            <PlusCircle className="mr-2 h-5 w-5" /> Nuevo Ticket
+          </Button>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
