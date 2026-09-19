@@ -15,15 +15,13 @@ import {
 } from 'lucide-react'
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
-  // MOCK AUTH PARA FASE DE MAQUETACIÓN
-  const user = { email: 'admin@empresa.com' } 
-  // const supabase = await createClient()
-  // const { data: { user }, error } = await supabase.auth.getUser()
+  const supabase = await createClient()
+  const { data: { user }, error } = await supabase.auth.getUser()
 
   // Protect the dashboard route
-  // if (error || !user) {
-  //   redirect('/login')
-  // }
+  if (error || !user) {
+    redirect('/login')
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -45,9 +43,8 @@ export default async function DashboardLayout({ children }: { children: ReactNod
         <div className="p-4 border-t">
           <form action={async () => {
             'use server'
-            // MOCKUP PHASE: Evitamos llamar a Supabase porque aún no hay .env
-            // const supabase = await createClient()
-            // await supabase.auth.signOut()
+            const supabase = await createClient()
+            await supabase.auth.signOut()
             redirect('/login')
           }}>
             <button type="submit" className="flex items-center space-x-3 text-slate-600 hover:text-red-600 w-full px-3 py-2 rounded-md transition-colors">
