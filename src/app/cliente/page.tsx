@@ -67,6 +67,7 @@ export default async function ClienteDashboard() {
                 <TableHead>Asunto</TableHead>
                 <TableHead>Estado</TableHead>
                 <TableHead>Última actualización</TableHead>
+                <TableHead className="text-right">Acciones</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -75,18 +76,27 @@ export default async function ClienteDashboard() {
                 <TableCell>Problema con servidor de correos</TableCell>
                 <TableCell><Badge className="bg-purple-100 text-purple-800 border-none">Nuevo</Badge></TableCell>
                 <TableCell className="text-slate-500 text-sm">Hace 2 horas</TableCell>
+                <TableCell className="text-right">
+                  <Link href="/cliente/tickets/TK-2026-0124"><Button variant="outline" size="sm">Ver Detalle</Button></Link>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium text-blue-600">TK-2026-0120</TableCell>
                 <TableCell>Actualización de licencias Windows</TableCell>
                 <TableCell><Badge className="bg-amber-100 text-amber-800 border-none">Esperando tu respuesta</Badge></TableCell>
                 <TableCell className="text-slate-500 text-sm">Ayer</TableCell>
+                <TableCell className="text-right">
+                  <Link href="/cliente/tickets/TK-2026-0120"><Button variant="outline" size="sm">Ver Detalle</Button></Link>
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-medium text-blue-600">TK-2026-0115</TableCell>
                 <TableCell>Instalación de antivirus</TableCell>
                 <TableCell><Badge className="bg-green-100 text-green-800 border-none">Resuelto</Badge></TableCell>
                 <TableCell className="text-slate-500 text-sm">15 Sep 2026</TableCell>
+                <TableCell className="text-right">
+                  <Link href="/cliente/tickets/TK-2026-0115"><Button variant="outline" size="sm">Ver Detalle</Button></Link>
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
