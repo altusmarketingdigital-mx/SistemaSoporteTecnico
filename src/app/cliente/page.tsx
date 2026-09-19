@@ -4,13 +4,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge'
 import { PlusCircle, Clock, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { createClient } from '@/utils/supabase/server'
 
-export default function ClienteDashboard() {
+export default async function ClienteDashboard() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const firstName = user?.user_metadata?.full_name?.split(' ')[0] || 'Usuario'
+
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800">Hola, Roberto</h1>
+          <h1 className="text-3xl font-bold text-slate-800">Hola, {firstName}</h1>
           <p className="text-slate-500">Aquí puedes dar seguimiento a todas tus solicitudes de soporte.</p>
         </div>
         <Link href="/cliente/nuevo-ticket">
