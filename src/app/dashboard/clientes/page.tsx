@@ -15,6 +15,16 @@ export default async function ClientesPage() {
     .eq('role', 'Cliente')
     .order('created_at', { ascending: false })
 
+  if (error) {
+    return (
+      <div className="p-8 text-center">
+        <h2 className="text-red-500 font-bold text-xl mb-2">Error de Base de Datos</h2>
+        <p className="text-slate-600">{error.message}</p>
+        <p className="text-sm mt-4">Asegúrate de haber ejecutado el script SQL en Supabase para crear la tabla 'profiles'.</p>
+      </div>
+    )
+  }
+
   const listaClientes = clientes || []
 
   return (
