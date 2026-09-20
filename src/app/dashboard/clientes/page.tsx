@@ -11,11 +11,10 @@ import { createClient } from '@/utils/supabase/server'
 export default async function ClientesPage() {
   const supabase = await createClient()
 
-  // Consultar todos los perfiles que tengan el rol de 'Cliente'
+  // Consultar TODOS los perfiles temporalmente para depuración
   const { data: clientes, error } = await supabase
     .from('profiles')
     .select('*')
-    .eq('role', 'Cliente')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -32,8 +31,12 @@ export default async function ClientesPage() {
 
   return (
     <div className="space-y-6">
+      <div className="bg-amber-100 text-amber-800 p-4 rounded-xl border border-amber-200 font-medium">
+        Modo Depuración: La base de datos devolvió exactamente {listaClientes.length} usuarios en total.
+      </div>
+
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-tight text-slate-800">Directorio de Clientes</h1>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-800">Directorio de Usuarios</h1>
         <Button className="bg-blue-600 hover:bg-blue-700">
           <Plus className="mr-2 h-4 w-4" /> Nuevo Cliente
         </Button>
@@ -48,17 +51,17 @@ export default async function ClientesPage() {
         <Table>
           <TableHeader className="bg-slate-50 border-b border-slate-100">
             <TableRow className="hover:bg-transparent">
-              <TableHead className="font-semibold text-slate-600 py-4 px-6">Nombre del Cliente</TableHead>
-              <TableHead className="font-semibold text-slate-600 py-4">Correo (Contacto)</TableHead>
+              <TableHead className="font-semibold text-slate-600 py-4 px-6">Nombre</TableHead>
+              <TableHead className="font-semibold text-slate-600 py-4">Correo</TableHead>
+              <TableHead className="font-semibold text-slate-600 py-4">Rol</TableHead>
               <TableHead className="font-semibold text-slate-600 py-4">Fecha de Registro</TableHead>
-              <TableHead className="font-semibold text-slate-600 py-4">Estado</TableHead>
               <TableHead className="text-right font-semibold text-slate-600 py-4 px-6">Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {listaClientes.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-12 text-slate-500">
+                <TableCell colSpan={5} className="text-center py-12 text-slate-500 font-medium">
                   Aún no hay clientes registrados en la plataforma.
                 </TableCell>
               </TableRow>
@@ -73,13 +76,17 @@ export default async function ClientesPage() {
                       <Mail className="w-3.5 h-3.5 mr-2 text-slate-400" /> {cliente.email}
                     </div>
                   </TableCell>
+                  <TableCell className="py-4">
+                    <Badge className="bg-slate-100 text-slate-700 border-none px-3 py-1 font-semibold rounded-full">
+                      {cliente.role || 'Desconocido'}
+                    </Badge>
+                  </TableCell>
                   <TableCell className="text-slate-500 text-sm py-4">
                     <div className="flex items-center">
                       <Calendar className="w-3.5 h-3.5 mr-2 text-slate-400" />
                       {new Date(cliente.created_at).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })}
                     </div>
                   </TableCell>
-                  <TableCell className="py-4"><Badge className="bg-green-100 text-green-800 border-none px-3 py-1 font-semibold rounded-full">Activo</Badge></TableCell>
                   <TableCell className="text-right px-6 py-4">
                     <Button variant="outline" size="sm" className="text-blue-600 border-blue-200 hover:bg-blue-50 font-semibold rounded-full">Gestionar</Button>
                   </TableCell>
